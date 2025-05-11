@@ -30,7 +30,7 @@
 
             <div class="flip-card-back">
                 <a type="button" class="btn btn-success btn-sm" href="{% url 'edit' todo.id %}">Edit</a>
-                <a type="button" class="btn btn-danger btn-sm">Delete</a>
+                <a type="button" class="btn btn-danger btn-sm" href="{% url 'delete' todo.id %}">Delete</a>
             </div>
         </div>
         </div>
