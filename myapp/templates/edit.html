@@ -12,7 +12,7 @@
        {% csrf_token %}
        <div class="input-group mb-3 mt-4">
            <input class="form-check-input me-1" type="checkbox" value="True" id="checkDefault" name="completed">
-           <input type="text" class="form-control" placeholder="{{ todo.title }}" aria-label="Example text with button addon" aria-describedby="button-addon2" value="" name="title">
+           <input type="text" class="form-control" value="{{ todo.title }}" aria-label="Example text with button addon" aria-describedby="button-addon2" value="" name="title">
            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Edit</button>
        </div>
    </form>
