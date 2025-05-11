@@ -44,7 +44,7 @@ def edit(request, id):
         todo.save()
         return redirect('todos')
 
-    return render(request, 'edit.html', {'form': form, 'todos': todo})
+    return render(request, 'edit.html', {'form': form, 'todo': todo})
 
 
 def delete(request, id):
