@@ -48,3 +48,9 @@ def edit(request, id):
 
     return render(request, 'edit.html', {'form': form, 'todo': todo})
 
+
+def delete(request, id):
+    todo = get_object_or_404(TodoItem, id=id)
+    todo.delete()
+    print('yessss')
+    return render(request, 'todos.html', {'todos': TodoItem.objects.all()})
