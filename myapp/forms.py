@@ -1,5 +1,8 @@
 from django import forms
+from .models import TodoItem
 
 
 class MyForm(forms.ModelForm):
-    todo = forms.CharField(label="To do", max_length=100)
+    class Meta:
+        model = TodoItem
+        fields = '__all__'
