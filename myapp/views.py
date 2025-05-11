@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 
 from .models import TodoItem
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import MyForm
 
 
@@ -23,8 +23,28 @@ def create_todo(request):
             completed = False
         todo = TodoItem.objects.create(title=title, completed=completed)
         todo.save()
-        return redirect( 'todos')
+        return redirect('todos')
     else:
-        print('yes')
         form = MyForm()
     return render(request, 'todos.html', {'form': form})
+
+
+def edit(request, id):
+    todo = get_object_or_404(TodoItem, id=id)
+    form = MyForm(request.POST)
+
+    if form.is_valid():
+        if 'title' in request.POST:
+            title = request.POST['title']
+        if 'completed' in request.POST:
+            completed = request.POST['completed']
+        else:
+            completed = False
+
+        todo.title = title
+        todo.completed = completed
+        todo.save()
+        return redirect('todos')
+
+    return render(request, 'edit.html', {'form': form, 'todo': todo})
+
