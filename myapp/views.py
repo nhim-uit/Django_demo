@@ -1,8 +1,7 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.http import HttpResponse
+
 from .models import TodoItem
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
+from django.shortcuts import render, redirect
 from .forms import MyForm
 
 
@@ -12,16 +11,20 @@ def todos(request):
     return render(request, 'todos.html', {'todos': items})
 
 
-def create(request):
+def create_todo(request):
     form = MyForm(request.POST)
-
+    print(form.errors.as_data())
     if form.is_valid():
-        form.save()
-        return redirect(request, 'todos')
+        if 'title' in request.POST:
+            title = request.POST['title']
+        if 'completed' in request.POST:
+            completed = request.POST['completed']
+        else:
+            completed = False
+        todo = TodoItem.objects.create(title=title, completed=completed)
+        todo.save()
+        return redirect( 'todos')
     else:
+        print('yes')
         form = MyForm()
     return render(request, 'todos.html', {'form': form})
-
-
-
-
