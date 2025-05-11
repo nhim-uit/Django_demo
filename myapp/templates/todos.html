@@ -22,12 +22,11 @@
     </ul>
     <div class="input-group container">
 
-   <form method="post">
+   <form action="{% url 'create_todo' %}" method="post">
        {% csrf_token %}
-       <input class="form-check-input me-1" type="checkbox" value="" id="checkDefault">
-       {{ form.as_p }}
-       <input id="to_do" type="text" name="to_do" value="">
-       <input type="submit" value="Add"/>
+       <input class="form-check-input me-1" type="checkbox" value="True" id="checkDefault" name="completed">
+       <input id="todo" type="text" value="" name="title">
+       <button type="submit">Add</button>
    </form>
 
     </div>
